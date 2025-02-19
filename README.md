@@ -75,3 +75,38 @@ id      version_id      is_applied      tstamp
 id      version_id      is_applied      tstamp
 1       0       1       2025-02-17 23:13:25
 ```
+
+## さらに新しいバージョン
+```
+% goose create test2 sql
+2025/02/19 23:42:55 Created new file: migrations/20250219144255_test2.sql
+
+% goose status
+2025/02/19 23:43:00     Applied At                  Migration
+2025/02/19 23:43:00     =======================================
+2025/02/19 23:43:00     Pending                  -- 20250219141258_test.sql
+2025/02/19 23:43:00     Pending                  -- 20250219144255_test2.sql
+
+## 未反映をすべて反映
+```
+% goose up
+2025/02/19 23:43:06 OK   20250219141258_test.sql (8.68ms)
+2025/02/19 23:43:06 OK   20250219144255_test2.sql (4.67ms)
+2025/02/19 23:43:06 goose: successfully migrated database to version: 20250219144255
+```
+
+## 1つ戻す
+```
+% goose status
+2025/02/19 23:43:19     Applied At                  Migration
+2025/02/19 23:43:19     =======================================
+2025/02/19 23:43:19     Wed Feb 19 23:43:06 2025 -- 20250219141258_test.sql
+2025/02/19 23:43:19     Wed Feb 19 23:43:06 2025 -- 20250219144255_test2.sql
+% goose down
+2025/02/19 23:43:33 OK   20250219144255_test2.sql (11.31ms)
+% goose status
+2025/02/19 23:43:37     Applied At                  Migration
+2025/02/19 23:43:37     =======================================
+2025/02/19 23:43:37     Wed Feb 19 23:43:06 2025 -- 20250219141258_test.sql
+2025/02/19 23:43:37     Pending                  -- 20250219144255_test2.sql
+```
