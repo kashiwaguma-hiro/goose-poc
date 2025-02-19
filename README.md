@@ -7,17 +7,13 @@
 ```
 export GOOSE_DRIVER=mysql GOOSE_DBSTRING="root:rootroot@tcp(localhost:23306)/test" 
 export GOOSE_MIGRATION_DIR=./migrations
-% goose version
-2025/02/19 23:36:17 goose: version 0
-
-% goose status 
-2025/02/19 23:36:22 goose run: failed to collect migrations: no migration files found
+goose version
 ```
 
 ## ファイル作成
 ```
-% goose create test sql
-2025/02/17 23:21:09 Created new file: 20250219141258_test.sql
+% goose create hoge sql
+2025/02/17 23:21:09 Created new file: 20250217142109_hoge.sql
 
  % goose status
 2025/02/19 23:23:22     Applied At                  Migration
@@ -27,7 +23,7 @@ export GOOSE_MIGRATION_DIR=./migrations
 
 ## 状況確認
 ```
-% docker exec -i goose-poc-db-1 mysql -uroot -prootroot -e "show databases"
+% docker exec -i goose_poc-db-1 mysql -uroot -prootroot -e "show databases"
 Database
 information_schema
 mysql
@@ -35,11 +31,11 @@ performance_schema
 sys
 test
 
-% docker exec -i goose-poc-db-1 mysql -uroot -prootroot test -e "show tables"
+% docker exec -i goose_poc-db-1 mysql -uroot -prootroot test -e "show tables"
 Tables_in_test
 goose_db_version
 
-% docker exec -i goose-poc-db-1 mysql -uroot -prootroot test -e "select * from goose_db_version;"
+% docker exec -i goose_poc-db-1 mysql -uroot -prootroot test -e "select * from goose_db_version;"
 id      version_id      is_applied      tstamp
 1       0       1       2025-02-17 23:13:25
 ```
@@ -55,7 +51,7 @@ id      version_id      is_applied      tstamp
 2025/02/19 23:24:52     =======================================
 2025/02/19 23:24:52     Wed Feb 19 23:24:35 2025 -- 20250219141258_test.sql
 
-% docker exec -i goose-poc-db-1 mysql -uroot -prootroot test -e "select * from goose_db_version;"
+% docker exec -i goose_poc-db-1 mysql -uroot -prootroot test -e "select * from goose_db_version;"
 id      version_id      is_applied      tstamp
 1       0       1       2025-02-17 23:13:25
 4       20250219141258  1       2025-02-19 23:24:35
@@ -71,7 +67,7 @@ id      version_id      is_applied      tstamp
 2025/02/19 23:25:30     =======================================
 2025/02/19 23:25:30     Pending                  -- 20250219141258_test.sql
 
-% docker exec -i goose-poc-db-1 mysql -uroot -prootroot test -e "select * from goose_db_version;"
+% docker exec -i goose_poc-db-1 mysql -uroot -prootroot test -e "select * from goose_db_version;"
 id      version_id      is_applied      tstamp
 1       0       1       2025-02-17 23:13:25
 ```
