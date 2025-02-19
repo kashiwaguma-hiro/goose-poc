@@ -1,0 +1,16 @@
+# see. https://hub.docker.com/r/boxfuse/flyway/#docker-compose
+version: '3'
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:8.0
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=useruser
+      - MYSQL_DATABASE=test
+      - MYSQL_ROOT_PASSWORD=rootroot
+    ports:
+      - 23306:3306
+    volumes:
+      - ./conf/my.cnf:/etc/mysql/conf.d/my.cnf
