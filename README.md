@@ -112,7 +112,7 @@ id      version_id      is_applied      tstamp
 2025/02/19 23:43:37     Pending                  -- 20250219144255_test2.sql
 ```
 
-## ｓらに新しいバージョンを追加
+## さらに新しいバージョンを追加
 ```
 % goose create test3 sql 
 2025/02/19 23:49:57 Created new file: migrations/20250219144957_test3.sql
